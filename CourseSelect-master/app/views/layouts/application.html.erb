@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>选课系统</title>
+    
+    <%= stylesheet_link_tag 'application', media: 'all' %> 
+    <%= stylesheet_link_tag 'css/bootstrap/bootstrap.min.css', media: 'all' %>
+    <!-- Font Awesome -->
+    <%= stylesheet_link_tag 'css/font/font-awesome.min.css', media: 'all' %>
+    <!-- iCheck -->
+    <%= stylesheet_link_tag 'css/iCheck/green.css', media: 'all'%>
+    <!-- bootstrap-progressbar -->
+    <%= stylesheet_link_tag 'css/bootstrap/bootstrap-progressbar-3.3.4.min.css', media: 'all'%>
+    <!-- jVectorMap -->
+    <%= stylesheet_link_tag 'css/jquery/jquery-jvectormap-2.0.3.css', media: 'all'  %>
+    <!-- Custom Theme Style -->
+    <%= stylesheet_link_tag 'css/custom.min.css', media: 'all'%>
+    <%= stylesheet_link_tag 'css/wn.css', media: 'all'%> 
+    <%= csrf_meta_tags %>
+
+    <%= yield :partCss%>
+
+  </head>
+
+	<body class="nav-md">
+		<div class="container body">
+      			<div class="main_container">
+				<%= render partial: 'layouts/header'%>
+				<%= render partial: 'layouts/content'%>
+				<%= render partial: 'layouts/footer' %>
+			</div>
+		</div>
+	     <!-- jQuery -->
+    	     <%= javascript_include_tag 'js/jqury/jquery.min.js', 'data-turbolinks-track' => true %>
+    	     <!-- Bootstrap -->
+    	     <%= javascript_include_tag 'js/bootstap/bootstrap.min.js', 'data-turbolinks-track' => true %>
+    	     <!-- FastClick -->
+    	     <%= javascript_include_tag 'js/others/fastclick.js', 'data-turbolinks-track' => true %>
+    	     <!-- NProgress -->
+    	     <%= javascript_include_tag 'js/others/nprogress.js', 'data-turbolinks-track' => true %>
+    	     <!-- bootstrap-progressbar -->
+    	     <%= javascript_include_tag 'js/bootstap/bootstrap-progressbar.min.js', 'data-turbolinks-track' => true %>
+    	     <!-- iCheck 选项框-->
+    	     <%= javascript_include_tag 'js/others/icheck.min.js', 'data-turbolinks-track' => true %>
+   	     <!-- Skycons -->
+    	     <%= javascript_include_tag 'js/others/skycons.js', 'data-turbolinks-track' => true %>
+   	     <!-- Custom Theme Scripts  重要-->
+	     <%= javascript_include_tag 'js/custom.min.js' %>
+	     <%= yield :partJs%>
+	</body>
+</html>

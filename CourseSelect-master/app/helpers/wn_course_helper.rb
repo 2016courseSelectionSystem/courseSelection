@@ -1,0 +1,2 @@
+module WnCourseHelper
+end

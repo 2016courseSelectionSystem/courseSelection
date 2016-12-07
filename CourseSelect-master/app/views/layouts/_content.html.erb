@@ -1,0 +1,9 @@
+<div class="container wn-toast">
+  <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong> <%= message %></strong>
+      </div>
+  <% end %>
+</div>
+<%= yield %>

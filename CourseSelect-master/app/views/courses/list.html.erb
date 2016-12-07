@@ -1,0 +1,89 @@
+<% content_for :partCss do %>
+<% end %>
+<% content_for :partJs do %>
+<% end %>
+
+<!-- page content -->
+<div class="right_col" role="main">
+  <!-- top tiles -->
+  <div class="row">
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    	<div class="wn-title green">选修课程</div>
+    </div>
+  </div>
+  <!-- /top tiles -->
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2 class="wryh">课程列表</h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+
+          <div class="x_content">
+
+            <p>请选择课程</p>
+
+            <div class="table-responsive">
+              <table class="table table-striped jambo_table bulk_action">
+                <thead>
+                  <tr class="headings">
+
+                    <th>课程编号</th>
+			              <th>课程名称</th>
+			              <th>课时/学分</th>
+			              <th>限选</th>
+			              <th>已选</th>
+			              <th>课程属性</th>
+			              <th>授课方式</th>
+			              <th>考试方式</th>
+			              <th>主讲教师</th>
+			              <th>操作</th>
+                    <!--<th class="column-title no-link last"><span class="nobr"></span>
+                    </th>-->
+                    <!--<th class="bulk-actions" colspan="7">
+                      <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                    </th>-->
+                  </tr>
+                </thead>
+								
+                <tbody>
+                	<% @course.each do |course| %>
+		                <tr class="even pointer">
+		
+		                  <td class=" "><%= course.course_code %></td>
+		                  <td class=" "><%= course.name %></td>
+		                  <td class=" "><%= course.credit %></td>
+		                  <td class=" "><%= course.limit_num %></td>
+		                  <td class=" "><%= course.student_num %></td>
+		                  <td class=" "><%= course.course_type %></td>
+		                  <td class=" "><%= course.teaching_type %></td>
+		                  <td class=" "><%= course.exam_type %></td>
+		                  <td class=" "><%= course.teacher.name %></td>
+		                  <td class=" "><%= link_to "加入课程", select_course_path(course), class: 'btn-sm btn-info' %></td>
+		
+		                </tr>
+	           			<% end %>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+  <br />
+
+</div>
+<!-- /page content -->

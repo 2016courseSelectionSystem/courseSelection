@@ -1,0 +1,29 @@
+.wn-title{
+	font-family: "微软雅黑";
+	font-size: 30px;
+	margin-bottom:20px;
+}
+.wryh{
+	font-family: "微软雅黑";
+}
+.head-img{
+	text:expression(src="assets/img");
+	/*src: url('assets/img');*/
+}
+
+.wn-toast{
+	width: 50%;
+    padding: 70px 0px 0px 70px;
+    left: 25%;
+    position: absolute;
+}
+.wn-badge{
+	padding: 1px 4px;
+}
+
+/***********************course start***********************/
+.table-striped tr :first-child{
+	margin-left: 20px;
+}
+
+/***********************course end***************************/
