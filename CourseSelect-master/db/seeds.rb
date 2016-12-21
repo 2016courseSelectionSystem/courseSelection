@@ -87,6 +87,10 @@ teacher_map={
     34 => {name: "张晋连", department: "计算机与控制学院"}
 }
 
+admin_map={
+    1 => {name: "yang", department: "计算技术研究所"}
+}
+
 course_map={
     1 => {course_code: "091M4001H", name: "计算机体系结构", course_type: "专业核心课", credit: "60/3.0", limit_num: "", course_week: "第2-20周", course_time: "周一(9-11)", class_room: "教1-107", teaching_type: "课堂讲授为主", exam_type: "闭卷笔试"},
     2 => {course_code: "091M4002H", name: "计算机网络", course_type: "专业核心课", credit: "60/3.0", limit_num: "", course_week: "第2-20周	", course_time: "周五(2-4)", class_room: "教1-107", teaching_type: "课堂讲授为主", exam_type: "闭卷笔试"},
@@ -123,6 +127,18 @@ course_map={
     33 => {course_code: "093M2007H", name: "数据库新技术", course_type: "一级学科普及课", credit: "40/2.0", limit_num: "", course_week: "第2-12周	", course_time: "周一(3-4)", class_room: "教1-107", teaching_type: "课堂讲授为主", exam_type: "闭卷笔试"},
     34 => {course_code: "09MGX005H", name: "Python语言导论", course_type: "公共选修课", credit: "40/1.0", limit_num: 154, course_week: "第4-14周	", course_time: "周二(7-8)", class_room: "教1-108", teaching_type: "课堂讲授为主", exam_type: "课堂开卷"},
 }
+
+
+admin_map.keys.each do |index|
+    admin=User.create!(
+      name: admin_map[index][:name],
+      email: "admin#{index}@test.com",
+      department: admin_map[index][:department],
+      password: "password",
+      password_confirmation: "password",
+      admin: true
+    )
+end
 
 teacher_map.keys.each do |index|
   teacher=User.create!(

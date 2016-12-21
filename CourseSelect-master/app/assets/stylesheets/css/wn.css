@@ -23,7 +23,73 @@
 
 /***********************course start***********************/
 .table-striped tr :first-child{
-	margin-left: 20px;
+	/*margin-left: 20px;*/
 }
 
 /***********************course end***************************/
+/***********************coursetable start***********************/
+/*.wn-course-table thead{
+	background: #DCDFE3;
+}*/
+
+.wn-table-head th{
+	width: 13.5%;
+	text-align: center;
+}
+.wn-table-head th:first-child{
+	width: 5.5%;
+}
+.wn-course-table tr,.wn-course-table td{
+	border-right: 1px solid rgba(38,185,154,0.11);
+}
+.wn-course-table tbody td{
+	position: relative;
+	height: 45px;
+	text-align: center;
+}
+.wn-course-table .class-item{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+}
+.wn-course-table .ht1{
+	height: 45px;
+}
+.wn-course-table .ht2{
+	height: 90px;
+}
+.wn-course-table .ht3{
+	height: 135px;
+}
+.wn-course-table .ht4{
+	height: 180px;
+}
+.wn-course-table .color1{
+	background: #61BDE6;
+}
+.wn-course-table .color2{
+	background: #97CD62;
+}
+.wn-course-table .color3{
+	background: #EA9BA0;
+}
+.wn-course-table .color4{
+	background: #85D4A4;
+}
+.wn-course-table .class-item p{
+	color: white;
+	margin: 0px 0px 0px 5px;
+	line-height: 20px;
+	text-align: left;
+	overflow : hidden;
+  	text-overflow: ellipsis;
+  	display: -webkit-box;
+  	white-space: nowrap;
+  	-webkit-line-clamp: 1;
+  	-webkit-box-orient: vertical;
+}
+.wn-course-table .class-item p:first-child{
+	margin-top: 5px;
+}
+/***********************coursetable end***********************/
