@@ -1,0 +1,2 @@
+module CheckemptyroomHelper
+end

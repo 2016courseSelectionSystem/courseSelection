@@ -22,9 +22,7 @@
 }
 
 /***********************course start***********************/
-.table-striped tr :first-child{
-	/*margin-left: 20px;*/
-}
+
 
 /***********************course end***************************/
 /***********************coursetable start***********************/
@@ -65,8 +63,11 @@
 .wn-course-table .ht4{
 	height: 180px;
 }
-.wn-course-table .color1{
+.wn-course-table .color0{
 	background: #61BDE6;
+}
+.wn-course-table .color1{
+	background: #F09300;
 }
 .wn-course-table .color2{
 	background: #97CD62;
