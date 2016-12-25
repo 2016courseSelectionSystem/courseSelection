@@ -16,7 +16,7 @@
       <div class="col-sm-9">
         <div class="input-group">
           <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>
-          <%= f.text_field :course_type, class: 'form-control', placeholder: "输入课程属性" %>
+          <%= f.select :course_type, %w(一级学科核心课 一级学科普及课 一级学科研讨课 专业核心课 专业普及课 专业研讨课), {}, {class: 'form-control', placeholder: "输入课程属性"} %>
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@
       <div class="col-sm-9">
         <div class="input-group">
           <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>
-          <%= f.text_field :exam_type, class: 'form-control', placeholder: "输入考试方式" %>
+          <%= f.select :exam_type, %w(课堂课卷 闭卷考试 其他（需说明）), {}, {class: 'form-control', placeholder: '输入考试方式'} %>
         </div>
       </div>
     </div>

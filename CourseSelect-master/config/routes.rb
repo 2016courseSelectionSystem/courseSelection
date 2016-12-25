@@ -41,10 +41,20 @@ Rails.application.routes.draw do
     end
     collection do
       get :list
+      get :grade
     end
   end
 
-  resources :grades, only: [:index, :update]
+  resources :grades, only: [:index, :update] do
+    collection do
+      get :course
+      get :chart
+      get :chart_bar
+      get :chart_pie
+      get :excel
+    end
+  end
+
   resources :users
 
   get 'sessions/login' => 'sessions#new'

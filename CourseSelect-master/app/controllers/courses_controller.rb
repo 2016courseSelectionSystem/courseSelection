@@ -13,7 +13,7 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     if @course.save
-      current_user.teaching_courses<<@course
+      #current_user.teaching_courses<<@course
       redirect_to courses_path, flash: {success: "新课程申请成功"}
     else
       flash[:warning] = "信息填写有误,请重试"
@@ -37,7 +37,7 @@ class CoursesController < ApplicationController
 
   def destroy
     @course=Course.find_by_id(params[:id])
-    current_user.teaching_courses.delete(@course)
+    #current_user.teaching_courses.delete(@course)
     @course.destroy
     flash={:success => "成功删除课程: #{@course.name}"}
     redirect_to courses_path, flash: flash
@@ -63,6 +63,9 @@ class CoursesController < ApplicationController
     redirect_to courses_path, flash: flash
   end
 
+  def grade
+    @course=Course.where(teacher_id: current_user)
+  end
   #-------------------------for students----------------------
 
   def list
@@ -89,7 +92,7 @@ class CoursesController < ApplicationController
   #-------------------------for both teachers and students----------------------
 
   def index
-    @course=current_user.teaching_courses if teacher_logged_in?
+    @course=Course.where(teacher_id: current_user) if teacher_logged_in?
     @course=current_user.courses if student_logged_in?
   end
 

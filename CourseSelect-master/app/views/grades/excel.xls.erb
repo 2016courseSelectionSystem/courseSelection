@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">课程</Data></Cell>
+        <Cell><Data ss:Type="String">学号</Data></Cell>
+        <Cell><Data ss:Type="String">姓名</Data></Cell>
+        <Cell><Data ss:Type="String">专业</Data></Cell>
+        <Cell><Data ss:Type="String">培养单位</Data></Cell>
+        <Cell><Data ss:Type="String">分数</Data></Cell>
+      </Row>
+      <% @grades.each do |grade| %>
+          <Row>
+            <Cell><Data ss:Type="String"><%= grade.course.name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= grade.user.num %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= grade.user.name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= grade.user.major %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= grade.user.department %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= grade.grade %></Data></Cell>
+          </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

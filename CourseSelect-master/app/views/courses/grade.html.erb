@@ -9,8 +9,7 @@
   <!-- top tiles -->
   <div class="row">
     <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-      <% if teacher_logged_in? %><div class="wn-title green">授课列表</div><% end %>
-      <% if student_logged_in? %><div class="wn-title green">已选课程</div><% end %>
+      <div class="wn-title green">授课列表</div>
     </div>
   </div>
   <!-- /top tiles -->
@@ -33,30 +32,17 @@
         </div>
 
         <div class="x_content">
-
-          <% if teacher_logged_in? %>
-              <p>任课课程</p>
-          <% elsif student_logged_in? %>
-              <p>已选择课程</p>
-          <% end %>
-
+          <p>任课课程</p>
           <div class="table-responsive">
-            <table class="table table-striped jambo_table bulk_action sortable">
+            <table class="table table-striped jambo_table bulk_action">
               <thead>
               <tr class="headings">
-
                 <th class="column-title">课程编号 </th>
                 <th class="column-title">课程名称 </th>
                 <th class="column-title">课时/学分</th>
                 <th class="column-title">考试方式</th>
-                <th class="column-title">主讲教师</th>
-                <% if teacher_logged_in? %>
-                    <th class="column-title">状态</th>
-                    <th class="column-title" colspan="3" style="text-align: center;" >操作</th>
-                <% elsif student_logged_in? %>
-                    <th class="column-title" >操作</th>
-                <% end %>
-
+                <th class="column-title">选课人数</th>
+                <th class="column-title">操作</th>
               </tr>
               </thead>
 
@@ -67,25 +53,13 @@
                     <td class=" "><%= course.name %></td>
                     <td class=" "><%= course.credit %></td>
                     <td class=" "><%= course.exam_type %></td>
-                    <td class=" "><%= course.teacher.name %></td>
+                    <td class=" "><%= course.grades.length %></td>
                     <% if teacher_logged_in? %>
                         <% if course.open? %>
-                            <td class=" ">已开课</td>
-                        <% else%>
+                            <td><%= link_to '录入成绩', grade_path, class: 'btn btn-xs btn-success' %></td>
+                        <% else %>
                             <td class=" ">未开课</td>
                         <% end %>
-
-                        <td><%= link_to "编辑", edit_course_url(course), class: 'btn btn-xs btn-info' %></td>
-
-                        <% if course.open? %>
-                            <td><%= link_to "关闭", closecourse_course_path(course), class: 'btn btn-xs btn-warning' %></td>
-                        <% else%>
-                            <td><%= link_to "开放", opencourse_course_path(course), class: 'btn btn-xs btn-success' %></td>
-                        <% end %>
-
-                        <td><%= link_to "删除", course_path(course), :method => "delete", class: 'btn btn-xs btn-danger', :data => {confirm: '确定要删除此课程?'} %></td>
-                    <% elsif student_logged_in? %>
-                        <td><%= link_to "删除", quit_course_path(course), class: 'btn-sm btn-danger' %></td>
                     <% end %>
                   </tr>
               <% end %>
