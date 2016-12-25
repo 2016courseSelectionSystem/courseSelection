@@ -8,6 +8,9 @@ $(document).ready(function () {
                 title: {
                     text: "成绩分布图"
                 },
+                tooltip: {
+                    trigger: 'item'
+                },
                 series: [
                     {
                         name: "成绩分布",
