@@ -1,51 +1,77 @@
-<div class="container-fluid">
+<% content_for :partCss do %>
+    <%= stylesheet_link_tag 'css/wn.css', media: 'all'%>
+<% end %>
+<% content_for :partJs do %>
+<% end %>
+
+<div class="right_col">
+  <!-- top title -->
   <div class="row">
-    <div class="col-sm-2">
-      <%= render "shared/sidenav" %>
-
+    <div class="col-md2 col-sm-4 col-xs-6 tile_stats_count">
+      <div class="wn-title green">成绩录入</div>
     </div>
-    <div class="col-sm-10">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <% if teacher_logged_in? %><h3 class="panel-title">成绩管理: <%=@course.name%></h3><% end %>
-          <% if student_logged_in? %><h3 class="panel-title">成绩列表</h3><% end %>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2 class="wryh">选课名单</h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li>
+              <%= link_to excel_grades_url(course_id: @course, format: 'xls') do %>
+                  <i class="fa fa-file-excel-o" data-toggle="tooltip" data-placement="top" title="Export Excel"></i>
+              <% end %>
+            </li>
+            <li>
+              <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+            </li>
+            <li>
+              <a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
         </div>
-        <div class="panel-body" style="min-height: 450px">
-          <table class="table table-striped table-hover">
-            <thead>
+        <div class="x_content">
+          <div class="table-responsive">
+            <table class="table table-striped jambo_table bulk_action sortable">
+              <thead>
+              <tr>
+                <th>学号</th>
+                <th>名字</th>
+                <th>专业</th>
+                <th>培养单位</th>
+                <th>课程</th>
+                <th>目前分数</th>
+                <th>提交</th>
+              </tr>
+              </thead>
+              <tbody>
 
-            <tr>
-              <th>学号</th>
-              <th>名字</th>
-              <th>专业</th>
-              <th>培养单位</th>
-              <th>课程</th>
-              <th>目前分数</th>
+              <% @grades.each do |grade| %>
+                  <tr>
+                    <td><%= grade.user.num %></td>
+                    <td><%= grade.user.name %></td>
+                    <td><%= grade.user.major %></td>
+                    <td><%= grade.user.department %></td>
+                    <td><%= grade.course.name %></td>
 
-            </tr>
-            </thead>
-            <tbody>
+                    <% if teacher_logged_in? %>
+                        <%= form_for grade, url: grade_url(id: grade.id, course_id: grade.course.id), method: :patch do |f| %>
+                            <td><%= f.text_field :grade, class: "form-control form_grade", placeholder: grade.grade %></td>
+                            <td><%= f.submit "提交", class: "btn btn-success btn-xs" %></td>
+                        <% end %>
 
-            <% @grades.each do |grade| %>
-                <tr>
-                  <td><%= grade.user.num %></td>
-                  <td><%= grade.user.name %></td>
-                  <td><%= grade.user.major %></td>
-                  <td><%= grade.user.department %></td>
-                  <td><%= grade.course.name %></td>
-                  <td><%= grade.grade %></td>
+                    <% end %>
 
-                  <% if teacher_logged_in? %>
-                      <%= form_for grade, url: grade_url(id: grade.id, course_id: grade.course.id), method: :patch do |f| %>
-                          <td><%= f.text_field :grade %></td>
-                          <td><%= f.submit "提交", class: "btn btn-success btn-xs" %></td>
-                      <% end %>
-                  <% end %>
-
-                </tr>
-            <% end %>
-            </tbody>
-          </table>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

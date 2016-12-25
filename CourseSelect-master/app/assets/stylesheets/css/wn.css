@@ -94,3 +94,14 @@
 	margin-top: 5px;
 }
 /***********************coursetable end***********************/
+
+/**********************  grade form  ************************/
+.form_grade {
+    width: 60px;
+    height: 30px;
+}
+
+/**********************  grade chart  ************************/
+.grade_chart {
+    height: 450px;
+}
