@@ -50,17 +50,30 @@
                       </tr>
                     </thead>
                     <tbody>
-                    	<!--<% count=0 %>
+                    	<% count=0 %>
                     	<% @tables.each do |i|%>
                     		<% count = count+1 %>
                     		<tr><td class=" "><%=count%></td>
-                    		<% i.each do |item|  %>
-                    			<td></td>
+                    		<% i.each do |item|%>
+                    			<td>
+                    			<% if item != '0' 
+                    					course_index = item.split("@")[0].to_i
+                    					course_length = item.split("@")[1]
+                    					course = @course[course_index]
+                    			%>
+                    				<div class="class-item ht<%=course_length%> color<%=course_index%5%>">
+			                      		<p><%=course.name%></p>
+			                      		<p><%=course.class_room%></p>
+			                      		<p><%=course.teacher.name%></p>
+			                      		<p><%=course.course_week%></p>
+			                      	</div>
+                    			<% end %>
+                    			</td>
                     		<% end %>
                     		</tr>
-                    	<% end %>-->
+                    	<% end %>
                     	
-                      <tr><td class=" ">1</td><td></td><td></td><td>
+                      <!--<tr><td class=" ">1</td><td></td><td></td><td>
                       	
                       		<% if teacher_logged_in? %>
                       			<div class="class-item ht2 color1">
@@ -112,7 +125,7 @@
                       	</div><% end %></td><td></td><td></td></tr>
                       <tr><td class=" ">10</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
                       <tr><td class=" ">11</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                      <tr><td class=" ">12</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                      <tr><td class=" ">12</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>-->
                     </tbody>
                   </table>
                 </div>

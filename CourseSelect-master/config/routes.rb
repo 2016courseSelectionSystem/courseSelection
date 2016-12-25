@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'coursetable/index'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -19,8 +17,7 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root 'wn#index'
- 
-  resources :test 
+  
   resources :wn_course do
     member do
 	get :select
@@ -36,8 +33,6 @@ Rails.application.routes.draw do
     member do
       get :select
       get :quit
-      get :opencourse
-      get :closecourse
     end
     collection do
       get :list
@@ -56,11 +51,15 @@ Rails.application.routes.draw do
   end
 
   resources :users
+  resources :coursetable, only: [:index]
+
+  
 
   get 'sessions/login' => 'sessions#new'
   post 'sessions/login' => 'sessions#create'
   delete 'sessions/logout' => 'sessions#destroy'
   get 'sessions/logout' => 'sessions#destroy'
+
 
 
   # Example resource route with options:
