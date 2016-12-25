@@ -41,7 +41,7 @@
                 <th class="column-title">课时/学分</th>
                 <th class="column-title">考试方式</th>
                 <th class="column-title">选课人数</th>
-                <th class="column-title" colspan="2" style="text-align: center">操作</th>
+                <th class="column-title">操作</th>
               </tr>
               </thead>
 
@@ -55,10 +55,12 @@
                     <td class=" "><%= course.grades.length %></td>
                     <% if teacher_logged_in? %>
                         <% if course.open? %>
-                            <td><%= link_to '录入成绩', grades_url(course_id: course.id), class: 'btn btn-xs btn-success' %></td>
-                            <td><%= link_to '成绩分布', chart_grades_url(course_id: course.id), class: 'btn btn-xs btn-info' %></td>
+                            <td>
+                              <%= link_to '录入成绩', grades_url(course_id: course.id), class: 'btn btn-xs btn-success' %>
+                              <%= link_to '成绩分布', chart_grades_url(course_id: course.id), class: 'btn btn-xs btn-info' %>
+                            </td>
                         <% else %>
-                            <td colspan="2">未开课</td>
+                            <td>未开课</td>
                         <% end %>
                     <% end %>
                   </tr>

@@ -19,7 +19,9 @@
           <h2 class="wryh">选课名单</h2>
           <ul class="nav navbar-right panel_toolbox">
             <li>
-              <%= link_to 'Excel', excel_grades_url(course_id: @course, format: 'xls') %>
+              <%= link_to excel_grades_url(course_id: @course, format: 'xls') do %>
+                  <i class="fa fa-file-excel-o" data-toggle="tooltip" data-placement="top" title="Export Excel"></i>
+              <% end %>
             </li>
             <li>
               <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -44,7 +46,7 @@
                 <th>培养单位</th>
                 <th>课程</th>
                 <th>目前分数</th>
-                <th colspan="2" style="text-align:center">提交</th>
+                <th>提交</th>
               </tr>
               </thead>
               <tbody>
@@ -56,13 +58,13 @@
                     <td><%= grade.user.major %></td>
                     <td><%= grade.user.department %></td>
                     <td><%= grade.course.name %></td>
-                    <td><%= grade.grade %></td>
 
                     <% if teacher_logged_in? %>
                         <%= form_for grade, url: grade_url(id: grade.id, course_id: grade.course.id), method: :patch do |f| %>
-                            <td><%= f.text_field :grade, class: "form-control form_grade" %></td>
+                            <td><%= f.text_field :grade, class: "form-control form_grade", placeholder: grade.grade %></td>
                             <td><%= f.submit "提交", class: "btn btn-success btn-xs" %></td>
                         <% end %>
+
                     <% end %>
 
                   </tr>

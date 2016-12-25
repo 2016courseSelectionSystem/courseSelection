@@ -4,6 +4,10 @@ class CoursesController < ApplicationController
   before_action :teacher_logged_in, only: [:new, :create, :edit, :destroy, :update]
   before_action :logged_in, only: :index
 
+  $CourseReview = 0
+  $CourseClose = 1
+  $CourseOpen = 2
+
   #-------------------------for teachers----------------------
 
   def new
@@ -12,6 +16,7 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.new(course_params)
+    @course.teacher_id=current_user.id
     if @course.save
       #current_user.teaching_courses<<@course
       redirect_to courses_path, flash: {success: "新课程申请成功"}
@@ -45,7 +50,7 @@ class CoursesController < ApplicationController
   
   def opencourse
     @course=Course.find_by_id(params[:id])
-    if @course.update_attributes(:open=>true)
+    if @course[:status] != $CourseReview && @course.update_attributes(:open=>true, :status=>$CourseOpen)
         flash={:info =>"开课成功"}
     else
         flash={:warning => "操作失败,请重试!"}
@@ -55,7 +60,7 @@ class CoursesController < ApplicationController
   
   def closecourse
     @course=Course.find_by_id(params[:id])
-    if @course.update_attributes(:open=>false)
+    if @course[:status] != $CourseReview && @course.update_attributes(:open=>false, :status=>$CourseClose)
         flash={:info =>"该课程已关闭"}
     else
         flash={:warning => "操作失败,请重试!"}
@@ -124,6 +129,5 @@ class CoursesController < ApplicationController
     params.require(:course).permit(:course_code, :name, :course_type, :teaching_type, :exam_type,
                                    :credit, :limit_num, :class_room, :course_time, :course_week)
   end
-
 
 end

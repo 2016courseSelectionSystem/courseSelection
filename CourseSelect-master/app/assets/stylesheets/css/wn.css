@@ -97,12 +97,11 @@
 
 /**********************  grade form  ************************/
 .form_grade {
-    width: 50px;
+    width: 60px;
     height: 30px;
 }
 
 /**********************  grade chart  ************************/
 .grade_chart {
-
     height: 450px;
 }

@@ -20,11 +20,11 @@ Rails.application.routes.draw do
   
   resources :wn_course do
     member do
-	get :select
-	get :quit
+      get :select
+      get :quit
     end
     collection do
-	get :list
+	    get :list
     end
   end
 
@@ -33,6 +33,8 @@ Rails.application.routes.draw do
     member do
       get :select
       get :quit
+      get :opencourse
+      get :closecourse
     end
     collection do
       get :list
