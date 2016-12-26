@@ -134,6 +134,6 @@ class GradesController < ApplicationController
         departments[key] = 0
       end
     end
-    return departments
+    departments
   end
 end
