@@ -45,9 +45,9 @@ Rails.application.routes.draw do
   resources :grades, only: [:index, :update] do
     collection do
       get :course
-      get :chart
-      get :chart_bar
-      get :chart_pie
+      get :grade_chart_bar
+      get :grade_chart_pie
+      get :department_chart
       get :excel
     end
   end
