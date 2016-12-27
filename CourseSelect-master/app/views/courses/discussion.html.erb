@@ -1,0 +1,77 @@
+<% content_for :partCss do %>
+    <%= stylesheet_link_tag 'css/wn.css', media: 'all'%>
+<% end %>
+<% content_for :partJs do %>
+    <%= javascript_include_tag 'js/chart.js', 'data-turbolinks-track' => true %>
+<% end %>
+
+<!-- page content -->
+<div class="right_col" role="main">
+  <!-- top tiles -->
+  <div class="row">
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <div class="wn-title green">授课列表</div>
+    </div>
+  </div>
+  <!-- /top tiles -->
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2 class="wryh">课程列表</h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+          <div class="table-responsive">
+            <table class="table table-striped jambo_table bulk_action sortable">
+              <thead>
+              <tr class="headings">
+                <th class="column-title">课程编号 </th>
+                <th class="column-title">课程名称 </th>
+                <th class="column-title">讨论数量</th>
+                <th class="column-title">未解决讨论数量</th>
+                <th class="column-title">操作</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <% @course.each do |course| %>
+                  <tr class="even pointer">
+                    <td class=" "><%= course.course_code %></td>
+                    <td class=" "><%= course.name %></td>
+                    <td class=" "><%= course.discussions.length %></td>
+                    <td class=" ">
+                      <% count = 0 %>
+                      <% course.discussions.each do |discussion| %>
+                        <% count += 1 if discussion.comments.length == 0 %>
+                      <% end %>
+                      <%= count %>
+                    </td>
+                    <td>
+                      <%= link_to '打开讨论区', course_discussion_index_path(course), class: 'btn btn-xs btn-info' %>
+                      <%= link_to '新建讨论', new_course_discussion_path(course), class: 'btn btn-xs btn-success' %>
+                    </td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- /page content -->

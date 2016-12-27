@@ -1,0 +1,92 @@
+<% content_for :partCss do %>
+    <%= stylesheet_link_tag 'css/wn', media: 'all' %>
+    <%= stylesheet_link_tag 'comment', media: 'all' %>
+<% end %>
+<% content_for :partJs do %>
+    <%= javascript_include_tag 'js/editor' %>
+<% end %>
+
+<!-- page content -->
+<div class="right_col" role="main">
+  <!-- top tiles -->
+  <div class="row">
+    <div class="col-md-12 tile_stats_count">
+      <div class="wn-title green"><%= @course.name %> 的讨论区</div>
+    </div>
+  </div>
+  <!-- /top tiles -->
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+
+        <div class="x_title">
+          <h2 class="wryh"><%= @discussion.title %> </h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li>
+              <%= link_to course_discussion_index_path(course_id: @course) do %>返回<% end %>
+            </li>
+            <li>
+              <%= link_to new_course_discussion_comment_path(course_id: @course, discussion_id: @discussion) do %>创建新回复<% end %>
+            </li>
+            <li>
+              <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+          <div class="discussion discussion_content">
+            <%= @discussion.content %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12" id="comments">
+      <ul class="comment_list">
+        <% @comments.each do |comment| %>
+          <li>
+            <div class="comment_item">
+              <div class="comment_left">
+
+              </div>
+              <div class="comment_right">
+                <div class="comment_heading">
+
+                </div>
+                <div class="comment_content">
+                  <%= comment.content %>
+                </div>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12" id="comment_editor">
+      <div class="editor_left">
+        <%= image_tag 'img.jpg', class: 'comment_avatar' %>
+      </div>
+      <div class="editor_right">
+        <%= form_for @comment, url: course_discussion_comment_index_path(course_id: @course, discussion_id: @discussion), method: :post, html: { class: 'form'} do |f| %>
+            <%= f.text_area :content %>
+
+            <%= f.submit '提交', class: "btn btn-success btn-block" %>
+            <%= link_to '取消', course_discussion_comment_index_path(course_id: @course, discussion_id: @discussion), :class => "btn btn-default btn-block" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+</div>
+<!-- /page content -->

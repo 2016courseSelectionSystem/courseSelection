@@ -39,19 +39,19 @@
           <div class="discussion">
             <ul class="media-list">
               <% @discussions.each do |discussion| %>
-                  <li class="media">
-                    <div class="media-left media-middle">
-                      <%= image_tag 'img.jpg', class: 'discussion_avatar' %>
-                    </div>
-                    <div class="media-body">
+                <li class="media">
+                  <div class="media-left media-middle">
+                    <%= image_tag 'img.jpg', class: 'discussion_avatar' %>
+                  </div>
+                  <div class="media-body">
 
-                      <h4 class="media-heading">
-                        <%= link_to discussion.title, course_discussion_path(id: discussion, course_id: @course) %>
-                        <span class="badge"><%= discussion.comments.length %></span>
-                      </h4>
-                      <%= discussion.user.name %> 在 <%= discussion.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %> 创建该讨论
-                    </div>
-                  </li>
+                    <h4 class="media-heading">
+                      <%= link_to discussion.title, course_discussion_comment_index_path(course_id: @course, discussion_id: discussion) %>
+                      <span class="badge"><%= discussion.comments.length %></span>
+                    </h4>
+                    <%= discussion.user.name %> 在 <%= discussion.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %> 创建该讨论
+                  </div>
+                </li>
               <% end %>
             </ul>
           </div>

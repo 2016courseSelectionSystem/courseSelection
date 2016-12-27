@@ -39,6 +39,10 @@ Rails.application.routes.draw do
     collection do
       get :list
       get :grade
+      get :discussion
+    end
+    resources :discussion do
+      resources :comment, only: [:index, :create, :new, :destroy]
     end
   end
 
@@ -54,6 +58,8 @@ Rails.application.routes.draw do
 
   resources :users
   resources :coursetable, only: [:index]
+
+
 
   
 

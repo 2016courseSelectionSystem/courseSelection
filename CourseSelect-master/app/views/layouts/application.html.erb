@@ -9,6 +9,9 @@
   <title>选课系统</title>
 
   <%= stylesheet_link_tag 'application', media: 'all' %>
+  <!-- bootstrap wysihtml5 -->
+  <%= stylesheet_link_tag 'css/bootstrap-wysihtml', media: 'all' %>
+  <!-- Bootstrap -->
   <%= stylesheet_link_tag 'css/bootstrap/bootstrap.min.css', media: 'all' %>
   <!-- Font Awesome -->
   <%= stylesheet_link_tag 'css/font/font-awesome.min.css', media: 'all' %>
@@ -24,6 +27,16 @@
   <%= csrf_meta_tags %>
 
   <%= yield :partCss%>
+
+
+  <!-- Bootstrap wysihtml5 -->
+  <%= javascript_include_tag 'js/wysihtml.min.js', 'data-turbolinks-track' => true %>
+  <!-- jQuery -->
+  <%= javascript_include_tag 'js/jqury/jquery.min.js', 'data-turbolinks-track' => true %>
+  <!-- Bootstrap -->
+  <%= javascript_include_tag 'js/bootstrap/bootstrap.min.js', 'data-turbolinks-track' => true %>
+  <!-- Bootstrap wysihtml5 -->
+  <%= javascript_include_tag 'js/bootstrap-wysihtml.min.js' , 'data-turbolinks-track' => true %>
 </head>
 
 <body class="nav-md">
@@ -35,10 +48,7 @@
     </div>
   </div>
 
-  <!-- jQuery -->
-  <%= javascript_include_tag 'js/jqury/jquery.min.js', 'data-turbolinks-track' => true %>
-  <!-- Bootstrap -->
-  <%= javascript_include_tag 'js/bootstrap/bootstrap.min.js', 'data-turbolinks-track' => true %>
+
   <!-- FastClick -->
   <%= javascript_include_tag 'js/others/fastclick.js', 'data-turbolinks-track' => true %>
   <!-- NProgress -->

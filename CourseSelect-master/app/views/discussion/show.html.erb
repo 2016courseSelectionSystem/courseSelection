@@ -1,0 +1,49 @@
+<% content_for :partCss do %>
+    <%= stylesheet_link_tag 'css/wn.css', media: 'all'%>
+    <%= stylesheet_link_tag 'css/bootstrap-wysihtml', media: 'all' %>
+<% end %>
+<% content_for :partJs do %>
+    <%= javascript_include_tag 'js/bootstrap-wysihtml.min', 'data-turbolinks-track' => true %>
+<% end %>
+
+<div class="right_col">
+  <!-- top title -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="wn-title green">讨论区</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="x_panel">
+
+        <div class="x_title">
+          <h2><%= @discussion.title %></h2>
+          <p><%= @discussion.content %></p>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+          <ul class="media-list">
+            <% @discussion.comments.each do |comment| %>
+                <li class="media">
+                  <div class="media-left">
+                    <img src="img.jpg">
+                  </div>
+                  <div class="media-body">
+                    <%= comment.content %>
+                  </div>
+                </li>
+            <% end %>
+          </ul>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+

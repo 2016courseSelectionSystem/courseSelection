@@ -17,4 +17,4 @@ test:
 
 production:
   <<: *default
-  database: courseselect_developement
+  database: courseselect_production
