@@ -16,7 +16,7 @@ class DiscussionController < ApplicationController
     @discussion = @course.discussions.new(discussion_params)
     @discussion.user_id = current_user.id
     if @discussion.save
-      redirect_to course_discussion_path(id: @discussion, course_id: @course), flash: {success: "新讨论创建成功"}
+      redirect_to course_discussion_comment_index_path(course_id: @course, discussion_id: @discussion), flash: {success: "新讨论创建成功"}
     else
       flash[:warning] = "信息填写有误,请重试"
       render 'new'

@@ -1,5 +1,6 @@
 <% content_for :partCss do %>
     <%= stylesheet_link_tag 'css/wn', media: 'all' %>
+    <%= stylesheet_link_tag 'discussion', media: 'all' %>
     <%= stylesheet_link_tag 'comment', media: 'all' %>
 <% end %>
 <% content_for :partJs do %>
@@ -16,72 +17,70 @@
   </div>
   <!-- /top tiles -->
 
-  <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="x_panel">
-
-        <div class="x_title">
-          <h2 class="wryh"><%= @discussion.title %> </h2>
-          <ul class="nav navbar-right panel_toolbox">
-            <li>
-              <%= link_to course_discussion_index_path(course_id: @course) do %>返回<% end %>
-            </li>
-            <li>
-              <%= link_to new_course_discussion_comment_path(course_id: @course, discussion_id: @discussion) do %>创建新回复<% end %>
-            </li>
-            <li>
-              <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-            </li>
-          </ul>
-          <div class="clearfix"></div>
+  <div class="row comment">
+    <div class="col-md-12">
+      <div class="media">
+        <div class="media-left">
+          <%= image_tag 'img.jpg', class: 'discussion_avatar'%>
         </div>
-
-        <div class="x_content">
-          <div class="discussion discussion_content">
-            <%= @discussion.content %>
+        <div class="media-body comment_container">
+          <div class="comment_heading">
+            <% if @discussion.user.teacher %>
+                <i class="fa fa-user-plus fa-fw" data-toggle="tooltip" data-placement="top" title="教师"></i>
+            <% end %>
+            <%= @discussion.user.name %> 于 <%= @discussion.created_at.localtime.strftime('%Y年%m月%d %H-%M-%S') %> 创建了讨论
+          </div>
+          <div class="comment_content">
+            <div class="discussion_title">
+              <%= @discussion.title %>
+            </div>
+            <div class="discussion_content">
+              <%= raw @discussion.content %>
+            </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12" id="comments">
-      <ul class="comment_list">
-        <% @comments.each do |comment| %>
-          <li>
-            <div class="comment_item">
-              <div class="comment_left">
 
-              </div>
-              <div class="comment_right">
-                <div class="comment_heading">
-
-                </div>
-                <div class="comment_content">
-                  <%= comment.content %>
-                </div>
-              </div>
-            </div>
-          </li>
-        <% end %>
-      </ul>
+  <% @comments.each do |comment| %>
+  <div class="row comment">
+    <div class="col-md-12" >
+      <div class="media">
+        <div class="media-left comment_user">
+          <%= image_tag 'img.jpg', class: 'discussion_avatar' %>
+        </div>
+        <div class="media-body comment_container">
+          <div class="comment_heading">
+            <% if comment.user.teacher %>
+                <i class="fa fa-user-plus fa-fw" data-toggle="tooltip" data-placement="top" title="教师"></i>
+            <% end %>
+            <%= comment.user.name %> 回复于 <%= comment.created_at.localtime.strftime('%Y年%m月%d %H-%M-%S') %>
+          </div>
+          <div class="comment_content">
+            <%= raw comment.content %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  <% end %>
 
   <div class="row">
-    <div class="col-md-12" id="comment_editor">
-      <div class="editor_left">
-        <%= image_tag 'img.jpg', class: 'comment_avatar' %>
-      </div>
-      <div class="editor_right">
-        <%= form_for @comment, url: course_discussion_comment_index_path(course_id: @course, discussion_id: @discussion), method: :post, html: { class: 'form'} do |f| %>
-            <%= f.text_area :content %>
+    <div class="col-md-12 media">
+      <div id="comment_editor">
+        <div class="media-left">
+          <%= image_tag 'img.jpg', class: 'discussion_avatar' %>
+        </div>
+        <div class="editor_right media-body">
+          <%= form_for @comment, url: course_discussion_comment_index_path(course_id: @course, discussion_id: @discussion), method: :post, html: { class: 'form'} do |f| %>
+              <%= f.text_area :content, class: 'form-control'%>
 
-            <%= f.submit '提交', class: "btn btn-success btn-block" %>
-            <%= link_to '取消', course_discussion_comment_index_path(course_id: @course, discussion_id: @discussion), :class => "btn btn-default btn-block" %>
-        <% end %>
+              <%= f.submit '提交', class: "btn btn-success btn-block" %>
+              <%= link_to '取消', course_discussion_comment_index_path(course_id: @course, discussion_id: @discussion), :class => "btn btn-default btn-block" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
