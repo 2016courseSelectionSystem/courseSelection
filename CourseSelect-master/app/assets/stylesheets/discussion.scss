@@ -1,0 +1,28 @@
+// Place all the styles related to the discussion controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.discussion li {
+  padding: 10px 0;
+  border-bottom: 1px solid #E6E9ED;
+}
+.discussion .media-body {
+  padding-top: 2px;
+  vertical-align: middle;
+}
+.discussion .media-heading {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+.discussion .badge {
+  margin-left: 10px;
+  vertical-align: top;
+}
+
+.discussion_avatar {
+  width: 50px;
+  height: 50px;
+  padding: 2px;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(52,73,94,0.44);
+}

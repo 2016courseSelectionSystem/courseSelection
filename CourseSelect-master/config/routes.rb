@@ -39,21 +39,27 @@ Rails.application.routes.draw do
     collection do
       get :list
       get :grade
+      get :discussion
+    end
+    resources :discussion do
+      resources :comment, only: [:index, :create, :new, :destroy]
     end
   end
 
   resources :grades, only: [:index, :update] do
     collection do
       get :course
-      get :chart
-      get :chart_bar
-      get :chart_pie
+      get :grade_chart_bar
+      get :grade_chart_pie
+      get :department_chart
       get :excel
     end
   end
 
   resources :users
   resources :coursetable, only: [:index]
+
+
 
   
 

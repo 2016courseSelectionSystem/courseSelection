@@ -101,6 +101,10 @@ class CoursesController < ApplicationController
     @course=current_user.courses if student_logged_in?
   end
 
+  def discussion
+    @course=Course.where(teacher_id: current_user) if teacher_logged_in?
+    @course=current_user.courses if student_logged_in?
+  end
 
   private
 
