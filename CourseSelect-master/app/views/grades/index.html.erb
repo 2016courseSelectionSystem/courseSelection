@@ -4,11 +4,13 @@
 <% content_for :partJs do %>
 <% end %>
 
-<div class="right_col">
-  <!-- top title -->
+
   <div class="row">
     <div class="col-md2 col-sm-4 col-xs-6 tile_stats_count">
-      <div class="wn-title green">成绩录入</div>
+      <div class="wn-title green">
+      	<% if teacher_logged_in? %>成绩录入<% end %>
+      	<% if student_logged_in? %>成绩查看<% end %>
+      </div>
     </div>
   </div>
 
@@ -16,7 +18,10 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2 class="wryh">选课名单</h2>
+          <h2 class="wryh">
+          	<% if teacher_logged_in? %>选课名单<% end %>
+      		<% if student_logged_in? %>成绩单<% end %>
+          </h2>
           <ul class="nav navbar-right panel_toolbox">
             <li>
               <%= link_to excel_grades_url(course_id: @course, format: 'xls') do %>
@@ -46,7 +51,9 @@
                 <th>培养单位</th>
                 <th>课程</th>
                 <th>目前分数</th>
-                <th>提交</th>
+                <% if teacher_logged_in? %>
+                	<th>提交</th>
+                <% end %>
               </tr>
               </thead>
               <tbody>
@@ -64,7 +71,13 @@
                             <td><%= f.number_field :grade, class: "form-control form_grade", placeholder: grade.grade %></td>
                             <td><%= f.submit "提交", class: "btn btn-success btn-xs" %></td>
                         <% end %>
-
+                    <% end %>
+                    <% if student_logged_in? %>
+                    	<% if grade.grade.nil?%>
+                    		<td>未评定</td>
+                    	<% else %>
+                    		<td><%=grade.grade %></td>
+                    	<% end %>
                     <% end %>
 
                   </tr>
@@ -76,6 +89,6 @@
       </div>
     </div>
   </div>
-</div>
+
 
 

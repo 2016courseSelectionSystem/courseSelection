@@ -7,5 +7,5 @@ class Course < ActiveRecord::Base
 
   belongs_to :teacher, class_name: "User"
 
-  validates :name, :course_type, :credit, :teaching_type, :exam_type, presence: true, length: {maximum: 50}
+  validates :name, :course_type, :credit, :teaching_type, :exam_type, :campus, presence: true, length: {maximum: 50}
 end

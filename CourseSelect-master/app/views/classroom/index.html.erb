@@ -8,7 +8,8 @@
   <!-- top tiles -->
   <div class="row">
     <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-      <div class="wn-title green">授课列表</div>
+      <div class="wn-title green">教室列表</div>
+
     </div>
   </div>
   <!-- /top tiles -->
@@ -17,7 +18,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2 class="wryh">课程列表</h2>
+          <h2 class="wryh">教室列表</h2>
           <ul class="nav navbar-right panel_toolbox">
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
             </li>
@@ -31,35 +32,30 @@
         </div>
 
         <div class="x_content">
-          <p>任课课程</p>
+
+
           <div class="table-responsive">
-            <table class="table table-striped jambo_table bulk_action">
+            <table class="table table-striped jambo_table bulk_action sortable">
               <thead>
               <tr class="headings">
-                <th class="column-title">课程编号 </th>
-                <th class="column-title">课程名称 </th>
-                <th class="column-title">课时/学分</th>
-                <th class="column-title">考试方式</th>
-                <th class="column-title">选课人数</th>
-                <th class="column-title">操作</th>
+
+                <th class="column-title">教室编号 </th>
+                <th class="column-title">教室名称 </th>
+                <th class="column-title">校区</th>
+                <th class="column-title">容量</th>
+                <th class="column-title">教学楼</th>
+
               </tr>
               </thead>
 
               <tbody>
-              <% @course.each do |course| %>
+              <% @classroom.each do |room| %>
                   <tr class="even pointer">
-                    <td class=" "><%= course.course_code %></td>
-                    <td class=" "><%= course.name %></td>
-                    <td class=" "><%= course.credit %></td>
-                    <td class=" "><%= course.exam_type %></td>
-                    <td class=" "><%= course.grades.length %></td>
-                    <% if teacher_logged_in? %>
-                        <% if course.open? %>
-                            <td><%= link_to '录入成绩', grade_path, class: 'btn btn-xs btn-success' %></td>
-                        <% else %>
-                            <td class=" ">未开课</td>
-                        <% end %>
-                    <% end %>
+                    <td class=" "><%= room.id %></td>
+                    <td class=" "><%= room.name %></td>
+                    <td class=" "><%= room.campus %></td>
+                    <td class=" "><%= room.volume %></td>
+                    <td class=" "><%= room.building %></td>
                   </tr>
               <% end %>
               </tbody>
@@ -70,3 +66,4 @@
     </div>
 
   </div>
+

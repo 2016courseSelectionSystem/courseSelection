@@ -1,0 +1,54 @@
+<% content_for :partCss do %>
+    <%= stylesheet_link_tag 'css/wn.css', media: 'all'%>
+    <%= stylesheet_link_tag 'css/bootstrap/bootstrap-select.css', media: 'all'%>
+<% end %>
+<% content_for :partJs do %>
+	<%= javascript_include_tag 'js/bootstrap/bootstrap-select.js' %>
+	<script>
+//		var classRooms = [
+//			["教一","学园一","学园二"],
+//			["教二","其他教室"]
+//		];		
+//		
+//		$('#lunch').change(function(){
+//			//获取省份
+//			var sel1=document.getElementById("lunch");
+//			//获取选中省的序号
+//			var n=parseInt(sel1.value);
+//			//获取该省份对应的城市
+//			var pcities=classRooms[n];
+//			//删除旧的城市
+//			var sel2=$('#lunch2');
+//			sel2.html("<option>请选择教学</option>");
+//			//追加新的城市
+//			var html_string = ""
+//			if(pcities){
+//				for(var i=0;i<pcities.length;i++){
+//					html_string += "<option value='"+i+"'>"+pcities[i]+"</option>"
+//				}
+//				sel2.html(html_string);
+//				sel2.selectpicker('refresh');
+//			}
+//		})
+	</script>
+<% end %>
+
+
+  <!-- top tiles -->
+  <div class="row">
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <div class="wn-title green" style="height: 40px;"></div>
+    </div>
+  </div>
+  <!-- /top tiles -->
+
+  <div class="col-md-offset-1 col-sm-6" style="margin: inherit;">
+    <div class="x_panel">
+      <div class="x_title">
+        <h3 class="text-center">编辑教室</h3>
+      </div>
+      <div class="x_content">
+        <%= render "classroom/form" %>
+      </div>
+    </div>
+  </div>

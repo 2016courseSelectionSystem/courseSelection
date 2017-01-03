@@ -34,7 +34,7 @@
                   <li>
                     <%= link_to list_courses_path do%>
                         <% wn_courses = Course.all-current_user.courses
-                           wn_courses = wn_courses.select{|item| item.open?}
+                           wn_courses = wn_courses.select{|item| item.open?&&item.status==$CourseOpen}
                         %>
                         选择课程 <span class="badge bg-green wn-badge"> <%= wn_courses.length%> </span>
                     <% end %>
@@ -50,16 +50,10 @@
 
               <li><a><i class="fa fa-edit"></i> 课程空间 <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><%= link_to coursetable_index_path do%>查看课表<% end %></li>
+                  <li><%= link_to coursetable_courses_path do%>查看课表<% end %></li>
                   <li><a href="#">空教室查询</a></li>
-                  <li><a href="#">成绩查询</a></li>
+                  <li><%= link_to grades_path do %>成绩查询<% end %></li>
                   <li><%= link_to discussion_courses_path do%>讨论区<% end %></li>
-                </ul>
-              </li>
-              <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                  <li><a href="tables.html">Tables</a></li>
-                  <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                 </ul>
               </li>
           <% end %>
@@ -70,21 +64,49 @@
                 <ul class="nav child_menu">
                   <li>
                     <%= link_to courses_path do%>
-                        已授课程 <span class="badge bg-green wn-badge"><%= current_user.teaching_courses.length %></span>
+                       	 已授课程 <span class="badge bg-green wn-badge"><%= current_user.teaching_courses.length %></span>
                     <% end %>
                   </li>
-                  <li>
-                    <%= link_to '创建新课程', new_course_path %>
-                  </li>
+                  <li><%= link_to '创建新课程', new_course_path %></li>
                 </ul>
               </li>
 
               <li>
                 <a><i class="fa fa-edit"></i> 课程空间 <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><%= link_to coursetable_index_path do%>查看课表<% end %></li>
+                  <li><%= link_to coursetable_courses_path do%>查看课表<% end %></li>
                   <li><%= link_to course_grades_path do %>评定成绩<% end %></li>
                   <li><%= link_to discussion_courses_path do%>讨论区<% end %></li>
+                </ul>
+              </li>
+          <% end %>
+          		
+          <% if admin_logged_in? %>
+          		<li >
+                <a><i class="fa fa-home"></i> 课程管理 <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li>
+                    <%= link_to courses_path do%>
+                       	 待审核课程 <span class="badge bg-green wn-badge"><%= Course.where(status: [$CourseReview,$CourseArrange]).length %></span>
+                    <% end %>
+                  </li>
+                  <li><%= link_to '选课控制', new_course_path %></li>
+                </ul>
+              </li>
+
+              <li>
+                <a><i class="fa fa-edit"></i> 教室管理 <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><%= link_to classroom_index_path do%>教室列表<% end %></li>
+                  <li><%= link_to edit_classroom_index_path do %>添加教室<% end %></li>
+                </ul>
+              </li>
+              
+              <li>
+                <a><i class="fa fa-edit"></i> 用户管理 <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><%= link_to course_grades_path do%>老师<% end %></li>
+                  <li><%= link_to course_grades_path do %>学生<% end %></li>
                 </ul>
               </li>
           <% end %>
@@ -110,20 +132,13 @@
             <% if current_user %>
                 <%= image_tag "img.jpg" %><%= current_user.name %>
             <% else %>
-                未登录
+               	 未登录
             <% end %>
             <span class=" fa fa-angle-down"></span>
           </a>
           <ul class="dropdown-menu dropdown-usermenu pull-right">
             <% if current_user %>
-              <li><%= link_to 'Profile', edit_user_path(current_user) %></li>
-              <li>
-                <a href="javascript:">
-                  <span class="badge bg-red pull-right">50%</span>
-                  <span>Settings</span>
-                </a>
-              </li>
-              <li><a href="javascript:">Help</a></li>
+              <li><%= link_to '个人信息', edit_user_path(current_user) %></li>
             <% end %>
 
             <% if current_user %>
