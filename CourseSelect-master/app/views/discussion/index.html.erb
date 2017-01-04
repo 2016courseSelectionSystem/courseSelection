@@ -1,0 +1,64 @@
+<% content_for :partCss do %>
+    <%= stylesheet_link_tag 'css/wn.css', media: 'all' %>
+    <%= stylesheet_link_tag 'discussion', media: 'all' %>
+<% end %>
+<% content_for :partJs do %>
+<% end %>
+
+
+  <!-- top tiles -->
+  <div class="row">
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <div class="wn-title green">讨论区</div>
+    </div>
+  </div>
+  <!-- /top tiles -->
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+
+        <div class="x_title">
+          <h2 class="wryh"><%= @course.name %> 的所有讨论</h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li>
+              <%= link_to discussion_courses_path do %>返回<% end %>
+            </li>
+            <li>
+              <%= link_to new_course_discussion_path(course_id: @course) do %>创建新讨论<% end %>
+            </li>
+            <li>
+              <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+          <div class="discussion">
+            <ul class="media-list">
+              <% @discussions.each do |discussion| %>
+                <li class="media">
+                  <div class="media-left media-middle">
+                    <%= image_tag 'img.jpg', class: 'discussion_avatar' %>
+                  </div>
+                  <div class="media-body">
+
+                    <h4 class="media-heading">
+                      <%= link_to discussion.title, course_discussion_comment_index_path(course_id: @course, discussion_id: discussion) %>
+                      <span class="badge"><%= discussion.comments.length %></span>
+                    </h4>
+                    <%= discussion.user.name %> 在 <%= discussion.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %> 创建该讨论
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+

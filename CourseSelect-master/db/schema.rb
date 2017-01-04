@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161225102343) do
+ActiveRecord::Schema.define(version: 20170103055422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "arranges", force: :cascade do |t|
+    t.integer  "course_id"
+    t.integer  "classtime_id"
+    t.integer  "classroom_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "arranges", ["classroom_id"], name: "index_arranges_on_classroom_id", using: :btree
+  add_index "arranges", ["classtime_id"], name: "index_arranges_on_classtime_id", using: :btree
 
   create_table "classrooms", force: :cascade do |t|
     t.string   "name"
@@ -24,6 +35,26 @@ ActiveRecord::Schema.define(version: 20161225102343) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "classtimes", force: :cascade do |t|
+    t.string   "weekday"
+    t.integer  "phase"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "discussion_id"
+    t.integer  "user_id"
+    t.text     "content",                       null: false
+    t.boolean  "teacher",       default: false
+    t.integer  "up",            default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "comments", ["discussion_id"], name: "index_comments_on_discussion_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "courses", force: :cascade do |t|
     t.string   "name"
@@ -42,7 +73,20 @@ ActiveRecord::Schema.define(version: 20161225102343) do
     t.datetime "updated_at",                    null: false
     t.boolean  "open",          default: false
     t.integer  "status",        default: 0
+    t.string   "campus"
   end
+
+  create_table "discussions", force: :cascade do |t|
+    t.integer  "course_id"
+    t.integer  "user_id"
+    t.string   "title",      null: false
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "discussions", ["course_id"], name: "index_discussions_on_course_id", using: :btree
+  add_index "discussions", ["user_id"], name: "index_discussions_on_user_id", using: :btree
 
   create_table "grades", force: :cascade do |t|
     t.integer  "course_id"

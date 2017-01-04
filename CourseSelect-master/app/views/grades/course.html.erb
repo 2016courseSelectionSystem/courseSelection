@@ -2,10 +2,10 @@
     <%= stylesheet_link_tag 'css/wn.css', media: 'all'%>
 <% end %>
 <% content_for :partJs do %>
+    <%= javascript_include_tag 'js/chart.js', 'data-turbolinks-track' => true %>
 <% end %>
 
-<!-- page content -->
-<div class="right_col" role="main">
+
   <!-- top tiles -->
   <div class="row">
     <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -57,7 +57,8 @@
                         <% if course.open? %>
                             <td>
                               <%= link_to '录入成绩', grades_url(course_id: course.id), class: 'btn btn-xs btn-success' %>
-                              <%= link_to '成绩分布', chart_grades_url(course_id: course.id), class: 'btn btn-xs btn-info' %>
+                              <a class="btn btn-xs btn-info grade_chart_btn" data-toggle="collapse" href="#grade_chart" data-course="<%= course.id %>">成绩分布</a>
+                              <a class="btn btn-xs btn-success department_chart_btn" data-toggle="collapse" href="#department_chart" data-course="<%= course.id %>">选课分布</a>
                             </td>
                         <% else %>
                             <td>未开课</td>
@@ -73,7 +74,47 @@
     </div>
 
   </div>
-  <br />
+
+  <!-- 成绩分布 -->
+  <div class="row collapse" id="grade_chart">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2 class="wryh">各分数段统计</h2>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <div class="grade_chart" id="grade_chart_bar"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2 class="wryh">各分数段统计</h2>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <div class="grade_chart" id="grade_chart_pie"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 选课分布 -->
+  <div class="row collapse" id="department_chart">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2 class="wryh">选课分布</h2>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <div class="grade_chart" id="department_chart_bar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
 <!-- /page content -->

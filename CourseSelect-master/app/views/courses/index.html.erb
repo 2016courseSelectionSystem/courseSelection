@@ -4,13 +4,13 @@
 <% content_for :partJs do %>
 <% end %>
 
-<!-- page content -->
-<div class="right_col" role="main">
+
   <!-- top tiles -->
   <div class="row">
     <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
       <% if teacher_logged_in? %><div class="wn-title green">授课列表</div><% end %>
       <% if student_logged_in? %><div class="wn-title green">已选课程</div><% end %>
+      <% if admin_logged_in? %><div class="wn-title green">审核课程</div><% end %>
     </div>
   </div>
   <!-- /top tiles -->
@@ -38,6 +38,7 @@
               <p>任课课程</p>
           <% elsif student_logged_in? %>
               <p>已选择课程</p>
+          
           <% end %>
 
           <div class="table-responsive">
@@ -52,6 +53,10 @@
                 <th class="column-title">主讲教师</th>
                 <% if teacher_logged_in? %>
                     <th class="column-title">状态</th>
+                    <th class="column-title" style="text-align: center;" >操作</th>
+                <% elsif admin_logged_in? %>
+                	<th class="column-title">状态</th>
+                	<th class="column-title">教室</th>
                     <th class="column-title" style="text-align: center;" >操作</th>
                 <% elsif student_logged_in? %>
                     <th class="column-title" >操作</th>
@@ -71,10 +76,14 @@
                     <% if teacher_logged_in? %>
                         <% if course.status == $CourseReview %>
                             <td class=" ">审核中</td>
+                        <% elsif course.status == $CourseArrange %>
+                        	<td class=" ">审核中</td>
                         <% elsif course.status == $CourseOpen %>
                             <td class=" ">已开课</td>
                         <% elsif course.status == $CourseClose %>
                             <td class=" ">未开课</td>
+                        <% elsif course.status == $CourseUnpass %>
+                            <td class=" ">审核不通过，请修改</td>
                         <% end %>
 
                         <td style="text-align: center">
@@ -85,13 +94,49 @@
                           <% elsif course.status == $CourseClose %>
                               <%= link_to "开放", opencourse_course_path(course), class: 'btn btn-xs btn-success' %>
                           <% end %>
+                          
+                          <% if course.status == $CourseUnpass %>
+                            <%= link_to "重新申请", applycourse_course_path(course), class: 'btn btn-xs btn-primary' %>
+                          <% end %>
 
-                          <%= link_to "删除", course_path(course), :method => "delete", class: 'btn btn-xs btn-danger', :data => {confirm: '确定要删除此课程?'} %>
+                          <%= link_to "删除", coursedestory_course_path(course), :method => "get", class: 'btn btn-xs btn-danger', :data => {confirm: '确定要删除此课程?'} %>
                         </td>
 
 
                     <% elsif student_logged_in? %>
-                        <td><%= link_to "删除", quit_course_path(course), class: 'btn-sm btn-danger' %></td>
+                        <td>
+                        	<% if course.open %>
+                        		<%= link_to "删除", quit_course_path(course), class: 'btn-sm btn-danger' %>
+                        	<% else %>
+                        	     已关闭选课
+                        	<% end %>
+                        </td>
+                    <% elsif admin_logged_in? %>
+                    	
+                    	<% if course.status == $CourseReview %>
+                            <td class=" ">审核中</td>
+                        <% elsif course.status == $CourseArrange %>
+                        	<td class=" ">排课完毕</td>
+                        <% elsif course.status == $CourseOpen %>
+                            <td class=" ">已开课</td>
+                        <% elsif course.status == $CourseClose %>
+                            <td class=" ">未开课</td>
+                        <% end %>
+                        
+                        <% if course.class_room.nil?  %>
+                    		<td class=" ">未安排</td>
+                    	<% else %>
+                    		<td class=" "><%=course.class_room%></td>
+                    	<% end %>
+                        
+                    	<td style="text-align: center">
+                          <%= link_to "编辑", edit_course_url(course), class: 'btn btn-xs btn-info' %>
+                          <% if course.status == $CourseReview %>
+                          	<%= link_to "排课", arrangecourse_course_path(course), class: 'btn btn-xs btn-primary' %>
+                          <% end %>
+                          <%= link_to "通过", passcourse_course_path(course), class: 'btn btn-xs btn-success' %>
+                          <%= link_to "不通过", nopasscourse_course_path(course), class: 'btn btn-xs btn-danger' %>
+                        </td>
                     <% end %>
                   </tr>
               <% end %>
@@ -103,7 +148,4 @@
     </div>
 
   </div>
-  <br />
 
-</div>
-<!-- /page content -->

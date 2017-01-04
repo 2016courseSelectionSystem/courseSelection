@@ -16,10 +16,10 @@ class GradesController < ApplicationController
     if teacher_logged_in?
       @course=Course.find_by_id(params[:course_id])
       @grades=@course.grades.order(user_id: :asc)
-    elsif student_logged_in?
+    elsif student_logged_in?    #学生查看成绩
       @grades=current_user.grades
     else
-      redirect_to root_path, flash: {:warning=>"请先登陆"}
+      redirect_to root_path, flash: {:warning=>"请先登陆!"}
     end
   end
 
@@ -31,15 +31,7 @@ class GradesController < ApplicationController
     end
   end
 
-  def chart
-    if teacher_logged_in?
-      @course=Course.where(teacher_id: current_user)
-    elsif
-      redirect_to root_path, flash: {:warning=>"请先登录"}
-    end
-  end
-
-  def chart_bar
+  def grade_chart_bar
     if teacher_logged_in?
       @course=Course.find_by_id(params[:course_id])
       @grades=@course.grades
@@ -47,7 +39,7 @@ class GradesController < ApplicationController
     render json: grade_avg_dist
   end
 
-  def chart_pie
+  def grade_chart_pie
     if teacher_logged_in?
       @course=Course.find_by_id(params[:course_id])
       @grades=@course.grades
@@ -65,8 +57,19 @@ class GradesController < ApplicationController
     end
   end
 
+  def department_chart
+    if teacher_logged_in?
+      course=Course.find_by_id(params[:course_id])
+      @grades=course.grades
+    end
+    departments = department_dist
+    render json: {keys: departments.keys, values: departments.values}
+  end
+ 
+#----------------------------for student start ----------------------------------------
 
 
+#----------------------------for student end ----------------------------------------
   private
 
   # Confirms a teacher logged-in user.
@@ -124,4 +127,16 @@ class GradesController < ApplicationController
     grade_dist
   end
 
+  def department_dist
+    departments = {}
+    @grades.each do |grade|
+      key = grade.user[:department].to_s.to_sym
+      if count = departments[key]
+        departments[key] = count + 1
+      else
+        departments[key] = 0
+      end
+    end
+    departments
+  end
 end

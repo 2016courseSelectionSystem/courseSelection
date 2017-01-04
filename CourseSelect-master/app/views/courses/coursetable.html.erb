@@ -1,0 +1,85 @@
+<% content_for :partCss do %>
+    <%= stylesheet_link_tag 'css/wn.css', media: 'all'%>
+<% end %>
+<% content_for :partJs do %>
+	<%= javascript_include_tag 'js/wn/course_table.js', 'data-turbolinks-track' => true %>
+<% end %>
+
+
+  <!-- top tiles -->
+  <div class="row">
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <% if teacher_logged_in? %><div class="wn-title green">授课时间表</div><% end %>
+      <% if student_logged_in? %><div class="wn-title green">课程表</div><% end %>
+    </div>
+  </div>
+  <!-- /top tiles -->
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="x_panel">
+              <div class="x_title">
+                <h2 class="wryh">当前周次：第<%=@week_now%>周</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  </li>
+                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  </li>
+                </ul>
+                <div class="clearfix"></div>
+              </div>
+
+              <div class="x_content">
+
+
+                <div class="table-responsive">
+                  <table class="wn-course-table table table-striped jambo_table bulk_action">
+                    <thead>
+                      <tr class="headings wn-table-head">
+                      	<th class="column-title"></th>
+                        <th class="column-title">周一 </th>
+                        <th class="column-title">周二 </th>
+                        <th class="column-title">周三 </th>
+                        <th class="column-title">周四 </th>
+                        <th class="column-title">周五 </th>
+                        <th class="column-title">周六</th>
+						<th class="column-title">周日</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    	<% count=0 %>
+                    	<% @tables.each do |i|%>
+                    		<% count = count+1 %>
+                    		<tr><td class=" "><%=count%></td>
+                    		<% i.each do |item|%>
+                    			<td>
+                    			<% if item != '0' 
+                    					course_index = item.split("@")[0].to_i
+                    					course_length = item.split("@")[1]
+                    					course = @course[course_index]
+                    			%>
+                    				<div class="class-item ht<%=course_length%> color<%=course_index%5 %>" wn-statue='0'>
+			                      		<div class="p-container"><p><%=course.name%></p>
+			                      		<p><%=course.class_room%></p>
+			                      		<p><%=course.teacher.name%></p>
+			                      		<p><%=course.course_week%></p></div>
+			                      	</div>
+                    			<% end %>
+                    			</td>
+                    		<% end %>
+                    		</tr>
+                    	<% end %>
+                    	
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+      </div>
+
+  </div>
+
+

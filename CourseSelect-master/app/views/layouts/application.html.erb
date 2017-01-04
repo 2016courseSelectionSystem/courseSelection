@@ -9,6 +9,7 @@
   <title>选课系统</title>
 
   <%= stylesheet_link_tag 'application', media: 'all' %>
+  <!-- Bootstrap -->
   <%= stylesheet_link_tag 'css/bootstrap/bootstrap.min.css', media: 'all' %>
   <!-- Font Awesome -->
   <%= stylesheet_link_tag 'css/font/font-awesome.min.css', media: 'all' %>
@@ -21,9 +22,12 @@
   <!-- Custom Theme Style -->
   <%= stylesheet_link_tag 'css/custom.min.css', media: 'all'%>
   <%= stylesheet_link_tag 'css/wn.css', media: 'all'%>
+  <!-- bootstrap wysihtml5 -->
+  <%= stylesheet_link_tag 'css/bootstrap3-wysihtml5.min.css', media: 'all' %>
   <%= csrf_meta_tags %>
 
   <%= yield :partCss%>
+
 </head>
 
 <body class="nav-md">
@@ -34,6 +38,7 @@
       <%= render partial: 'layouts/footer' %>
     </div>
   </div>
+
 
   <!-- jQuery -->
   <%= javascript_include_tag 'js/jqury/jquery.min.js', 'data-turbolinks-track' => true %>
@@ -55,6 +60,9 @@
   <%= javascript_include_tag 'js/sorttable.js', 'data-turbolinks-track' => true %>
   <!-- Custom Theme Scripts  重要-->
   <%= javascript_include_tag 'js/custom.min.js' %>
+  <!-- Bootstrap wysihtml5 -->
+  <%= javascript_include_tag 'js/bootstrap3-wysihtml5.all.min.js' , 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'js/bootstrap3-wysihtml5.min.js' , 'data-turbolinks-track' => true %>
 
   <%= yield :partJs%>
 </body>

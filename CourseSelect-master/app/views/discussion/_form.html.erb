@@ -1,0 +1,29 @@
+<%= form_for @discussion, url: course_discussion_index_path(course_id: @course), method: :post, html: {class: 'form-horizontal', role: 'form'} do |f| %>
+
+    <div class="form-group">
+      <%= f.label "标题", class: 'col-sm-2 col-md-1 control-label' %>
+      <div class="col-sm-9">
+        <div class="input-group">
+          <div class="input-group-addon"><i class="fa fa-header fa-fw"></i></div>
+          <%= f.text_field :title, class: 'form-control col-sm-8 col-md-5', placeholder: "标题内容" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label "内容", class: 'col-sm-2 col-md-1 control-label' %>
+      <div class="col-sm-9">
+        <div class="input-group">
+          <div class="input-group-addon"><i class="fa fa-align-justify fa-fw"></i></div>
+          <%= f.text_area :content, class: 'form-control col-sm-8 col-md-5' %>
+          <script>
+
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <%= f.submit '提交', class: "btn btn-success btn-block" %>
+    <%= link_to '取消', course_discussion_index_path(@course), :class => "btn btn-default btn-block" %>
+
+<% end %>
