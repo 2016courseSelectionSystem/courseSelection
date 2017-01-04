@@ -119,7 +119,13 @@ class CoursesController < ApplicationController
     flash={:success => "成功退选课程: #{@course.name}"}
     redirect_to courses_path, flash: flash
   end
+  
+  def checkroom
+  end
 
+  def checkemptyroom
+      
+  end
   #-------------------------for admin----------------------
   
   #通过审核
@@ -188,8 +194,8 @@ class CoursesController < ApplicationController
  
   end
   
+  #排课确认
   def arrangeconfirm
-
     arrange_ids = params[:arrange_ids]
     course_id = params[:id]
     class_room = ""
@@ -207,6 +213,50 @@ class CoursesController < ApplicationController
     end  
     redirect_to courses_path, flash: flash
   end
+  
+  #选课控制
+  def control
+    @course = Course.where('status = 2 or status = 3')
+  end
+  
+  def openselect
+    @course = Course.find_by_id(params[:id])
+    if @course.update_attributes(:open=>true)
+      flash={:info =>"开选成功"}
+    else
+      flash={:warning => "操作失败,请重试!"}
+    end
+    redirect_to control_courses_path, flash: flash  
+  end
+  
+  def closeselect
+    @course = Course.find_by_id(params[:id])
+    if @course.update_attributes(:open=>false)
+      flash={:info =>"关闭成功"}
+    else
+      flash={:warning => "操作失败,请重试!"}
+    end
+    redirect_to control_courses_path, flash: flash  
+  end
+  
+  def openall
+    @course = Course.where('status = 2 or status = 3')
+    @course.each do |course|
+      course.update_attributes(:open=>true)
+    end
+    flash={:info =>"开放成功"}
+    redirect_to control_courses_path, flash: flash
+  end
+  
+  def closeall
+    @course = Course.where('status = 2 or status = 3')
+    @course.each do |course|
+      course.update_attributes(:open=>false)
+    end
+    flash={:info =>"关闭成功"}
+    redirect_to control_courses_path, flash: flash 
+  end
+  
 
   #-------------------------for both teachers and students----------------------
 

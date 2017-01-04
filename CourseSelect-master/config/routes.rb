@@ -47,13 +47,20 @@ Rails.application.routes.draw do
       get :nopasscourse 
       get :arrangecourse
       get :arrangeconfirm
-      get :applycourse 
+      get :applycourse
+      get :openselect
+      get :closeselect 
     end
     collection do
       get :list
       get :grade
       get :discussion
       get :coursetable
+      get :control
+      get :openall
+      get :closeall
+      get :checkroom
+      
     end
     resources :discussion do
       resources :comment, only: [:index, :create, :new, :destroy]
@@ -81,8 +88,7 @@ Rails.application.routes.draw do
   post 'sessions/login' => 'sessions#create'
   delete 'sessions/logout' => 'sessions#destroy'
   get 'sessions/logout' => 'sessions#destroy'
-
-
+  post 'courses/checkemptyroom' =>'courses#checkemptyroom'
 
   # Example resource route with options:
   #   resources :products do

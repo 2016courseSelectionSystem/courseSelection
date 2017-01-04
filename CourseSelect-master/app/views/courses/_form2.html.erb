@@ -1,0 +1,37 @@
+<%= form_tag(controller:'courses',action:'courses_checkemptyroom',method:'post',class:'form-horizontal') do |f| %>
+
+	<div class="form-group">
+      <%= f.label "建议上课校区", class: 'col-sm-3 control-label' %>
+      <div class="col-sm-9">
+        <div class="input-group">
+          <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>
+          <%= f.select :campus, %w(西区 东区), {}, {class: 'form-control', placeholder: '选择校区'} %>
+        </div>
+      </div>
+    </div>
+	
+    <div class="form-group">
+      <%= f.label "建议上课周数", class: 'col-sm-3 control-label' %>
+      <div class="col-sm-9">
+        <div class="input-group">
+          <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>
+          <%= f.text_field :course_week, class: 'form-control', placeholder: "建议课程周数，例：第2-18周 " %>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <%= f.label "建议上课时间", class: 'col-sm-3 control-label' %>
+      <div class="col-sm-9">
+        <div class="input-group">
+          <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>
+          <%= f.text_field :course_time, class: 'form-control', placeholder: "建议上课时间，例：周二（3-4）" %>
+        </div>
+      </div>
+    </div>
+
+    <%= f.submit '提交', class: "btn btn-success btn-block" %>
+    <%= link_to '取消', courses_path, :class => "btn btn-default btn-block" %>
+
+<% end %>

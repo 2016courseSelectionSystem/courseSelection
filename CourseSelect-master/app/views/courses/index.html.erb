@@ -104,7 +104,13 @@
 
 
                     <% elsif student_logged_in? %>
-                        <td><%= link_to "删除", quit_course_path(course), class: 'btn-sm btn-danger' %></td>
+                        <td>
+                        	<% if course.open %>
+                        		<%= link_to "删除", quit_course_path(course), class: 'btn-sm btn-danger' %>
+                        	<% else %>
+                        	     已关闭选课
+                        	<% end %>
+                        </td>
                     <% elsif admin_logged_in? %>
                     	
                     	<% if course.status == $CourseReview %>
