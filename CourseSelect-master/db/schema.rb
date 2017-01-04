@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20170103055422) do
     t.datetime "updated_at",                    null: false
     t.boolean  "open",          default: false
     t.integer  "status",        default: 0
-    t.string   "campus"
+    t.string   "campus",        default: "西区"
   end
 
   create_table "discussions", force: :cascade do |t|
