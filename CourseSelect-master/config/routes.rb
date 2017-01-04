@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'classroom/index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -28,6 +30,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :classroom do
+    collection do
+      get :edit
+    end
+  end
  
   resources :courses do
     member do
@@ -35,11 +42,25 @@ Rails.application.routes.draw do
       get :quit
       get :opencourse
       get :closecourse
+      get :coursedestory
+      get :passcourse
+      get :nopasscourse 
+      get :arrangecourse
+      get :arrangeconfirm
+      get :applycourse
+      get :openselect
+      get :closeselect 
     end
     collection do
       get :list
       get :grade
       get :discussion
+      get :coursetable
+      get :control
+      get :openall
+      get :closeall
+      get :checkroom
+      
     end
     resources :discussion do
       resources :comment, only: [:index, :create, :new, :destroy]
@@ -53,11 +74,11 @@ Rails.application.routes.draw do
       get :grade_chart_pie
       get :department_chart
       get :excel
+      get :show_my_grade
     end
   end
 
   resources :users
-  resources :coursetable, only: [:index]
 
 
 
@@ -67,8 +88,7 @@ Rails.application.routes.draw do
   post 'sessions/login' => 'sessions#create'
   delete 'sessions/logout' => 'sessions#destroy'
   get 'sessions/logout' => 'sessions#destroy'
-
-
+  post 'courses/checkemptyroom' =>'courses#checkemptyroom'
 
   # Example resource route with options:
   #   resources :products do

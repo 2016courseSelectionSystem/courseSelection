@@ -72,7 +72,16 @@
       </div>
     </div>
     -->
-
+	<div class="form-group">
+      <%= f.label "建议上课校区", class: 'col-sm-3 control-label' %>
+      <div class="col-sm-9">
+        <div class="input-group">
+          <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>
+          <%= f.select :campus, %w(西区 东区), {}, {class: 'form-control', placeholder: '选择校区'} %>
+        </div>
+      </div>
+    </div>
+	
     <div class="form-group">
       <%= f.label "建议上课周数", class: 'col-sm-3 control-label' %>
       <div class="col-sm-9">

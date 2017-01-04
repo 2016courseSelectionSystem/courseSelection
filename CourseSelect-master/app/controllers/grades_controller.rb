@@ -16,10 +16,10 @@ class GradesController < ApplicationController
     if teacher_logged_in?
       @course=Course.find_by_id(params[:course_id])
       @grades=@course.grades.order(user_id: :asc)
-    elsif student_logged_in?
+    elsif student_logged_in?    #学生查看成绩
       @grades=current_user.grades
     else
-      redirect_to root_path, flash: {:warning=>"请先登陆"}
+      redirect_to root_path, flash: {:warning=>"请先登陆!"}
     end
   end
 
@@ -65,8 +65,11 @@ class GradesController < ApplicationController
     departments = department_dist
     render json: {keys: departments.keys, values: departments.values}
   end
+ 
+#----------------------------for student start ----------------------------------------
 
 
+#----------------------------for student end ----------------------------------------
   private
 
   # Confirms a teacher logged-in user.

@@ -20,6 +20,10 @@
 .wn-badge{
 	padding: 1px 4px;
 }
+.wn-body{
+	min-height: 947px;	
+}
+
 
 /***********************course start***********************/
 
@@ -29,7 +33,6 @@
 /*.wn-course-table thead{
 	background: #DCDFE3;
 }*/
-
 .wn-table-head th{
 	width: 13.5%;
 	text-align: center;
@@ -50,6 +53,8 @@
 	top: 0px;
 	left: 0px;
 	width: 100%;
+	z-index: 999;
+	overflow: hidden;
 }
 .wn-course-table .ht1{
 	height: 45px;
@@ -78,30 +83,27 @@
 .wn-course-table .color4{
 	background: #85D4A4;
 }
+.wn-course-table .class-item .p-container{
+	position: absolute;
+	overflow: hidden;
+}
+.wn-course-table .class-item.action{
+	z-index: 99999;
+}
 .wn-course-table .class-item p{
 	color: white;
 	margin: 0px 0px 0px 5px;
 	line-height: 20px;
 	text-align: left;
-	overflow : hidden;
-  	text-overflow: ellipsis;
-  	display: -webkit-box;
+	/*overflow : hidden;*/
+  	/*text-overflow: ellipsis;
+  	display: -webkit-box;*/
   	white-space: nowrap;
-  	-webkit-line-clamp: 1;
-  	-webkit-box-orient: vertical;
+  	/*-webkit-line-clamp: 1;*/
+  	/*-webkit-box-orient: vertical;*/
 }
 .wn-course-table .class-item p:first-child{
 	margin-top: 5px;
 }
+
 /***********************coursetable end***********************/
-
-/**********************  grade form  ************************/
-.form_grade {
-    width: 60px;
-    height: 30px;
-}
-
-/**********************  grade chart  ************************/
-.grade_chart {
-    height: 450px;
-}
